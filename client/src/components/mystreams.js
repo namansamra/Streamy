@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import swal from "sweetalert";
 import setHeaders from "../utils/setheader";
 import { timeDifference } from "../utils/timestamp";
@@ -7,14 +7,16 @@ import EditModal from "./editstream";
 import { ShowAndHide } from "../utils/conditionalshow";
 
 const MyStream = (props) => {
-  // console.log(props.stream)
+  // console.log(stream)
   const [myStreams, setStreams] = useState([]);
   const [modalState, setModalState] = useState(false);
   const [currStream, setCurrStream] = useState({});
+  const stream = useSelector((state) => state.stream.stream);
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     // console.log(props);
-    fetch(`/api/stream/getstreams/${props.user.email}`, {
+    fetch(`/api/stream/getstreams/${user.email}`, {
       headers: new Headers({
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -24,7 +26,7 @@ const MyStream = (props) => {
       .then((data) => {
         let finalStreams = [];
         data.map((st) => {
-          const s = props.stream.find((ps) => ps.key === st.key);
+          const s = stream.find((ps) => ps.key === st.key);
           // console.log(s)
           if (s !== undefined) {
             finalStreams = [...finalStreams, { ...st, live: true }];
@@ -32,7 +34,7 @@ const MyStream = (props) => {
         });
         setStreams(finalStreams);
       });
-  }, [props.stream, props.user.email]);
+  }, [stream, user.email]);
 
   function deleteStream(key) {
     swal({
@@ -221,11 +223,5 @@ const MyStream = (props) => {
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    user: state.user.user,
-    stream: state.stream.stream,
-  };
-};
 
-export default connect(mapStateToProps)(MyStream);
+export default MyStream;

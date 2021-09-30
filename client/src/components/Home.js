@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import "./styles/home.scss";
 
-const Home = ({ stream }) => {
+const Home = (props) => {
+  const stream = useSelector((state) => state.stream.stream);
   let streams = stream.map((stream, index) => {
     return (
       <div className="stream col-xs-12 col-sm-12 col-md-3 col-lg-4" key={index}>
@@ -37,10 +38,5 @@ const Home = ({ stream }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    stream: state.stream.stream,
-  };
-};
 
-export default connect(mapStateToProps)(Home);
+export default Home;

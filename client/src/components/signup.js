@@ -1,41 +1,44 @@
-import React, {useState,useEffect} from 'react'
-import {connect} from 'react-redux'
-import {signup} from '../actions/auth'
-import fb from '../config/firebase'
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { signup } from "../actions/auth";
+import fb from "../config/firebase";
+import { Link } from "react-router-dom";
 import { addFlashMessage } from "../actions/flash";
 
-const SignUp = ({auth,user,history,addFlashMessage})=>{
-    const [email,setEmail] = useState('');
-    const [pass,setPass] = useState('');
+const SignUp = ({ auth, history, addFlashMessage }) => {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-      if(user)
-          history.push('/')
-  },[user])
+  useEffect(() => {
+    if (user) history.push("/");
+  }, [user]);
 
-function handleSignUp(e){
-  e.preventDefault();
-  fb.auth()
-    .createUserWithEmailAndPassword(email, pass)
-    .then((user) => {
-      addFlashMessage({
-        type: "success",
-        text: "Signed up successfully",
+  function handleSignUp(e) {
+    e.preventDefault();
+    fb.auth()
+      .createUserWithEmailAndPassword(email, pass)
+      .then((user) => {
+        dispatch(
+          addFlashMessage({
+            type: "success",
+            text: "Signed up successfully",
+          })
+        );
+        auth(user);
+      })
+      .catch((err) => {
+        dispatch(
+          addFlashMessage({
+            type: "error",
+            text: `${err.message}`,
+          })
+        );
       });
-      auth(user);
-    })
-    .catch((err) => {
-      addFlashMessage({
-        type: "error",
-        text: `${err.message}`,
-      });
-      console.log(err);
-    });
-    
-}
+  }
 
-    return(
+  return (
     <div className="container outerbox">
       <div className="text-center">
         <h3>SignUp to Streamy</h3>
@@ -66,11 +69,7 @@ function handleSignUp(e){
           />
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-dark submit-btn"
-          form="1"
-        >
+        <button type="submit" className="btn btn-dark submit-btn" form="1">
           SignUp
         </button>
       </form>
@@ -78,17 +77,15 @@ function handleSignUp(e){
         Already on Streamy? <Link to="/login">Login</Link>
       </p>
     </div>
-    )
+  );
+};
 
-   
-}
-
-const mapStateToProps = (state)=>{
-    return {
-        user : state.user.user
-    }
-}
-export default connect(mapStateToProps,{
-    auth : signup,
-    addFlashMessage : addFlashMessage
-})(SignUp)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user,
+  };
+};
+export default connect(mapStateToProps, {
+  auth: signup,
+  addFlashMessage: addFlashMessage,
+})(SignUp);

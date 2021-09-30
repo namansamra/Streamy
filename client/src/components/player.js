@@ -3,10 +3,9 @@ import { ReactFlvPlayer } from "react-flv-player";
 import { timeDifference } from "../utils/timestamp";
 
 class Player extends Component {
-   
   render() {
     return (
-      <div style={{ display: "flex", flexDirection: "column" }} >
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <ReactFlvPlayer
           url={`http://localhost:8001/live/${this.props.stream.key}.flv`}
           isLive={true}
@@ -20,15 +19,20 @@ class Player extends Component {
             justifyContent: "space-between",
           }}
         >
-          <div style={{ fontSize: "x-large", fontWeight: "bolder" }}>{this.props.stream.title}</div>
-          <div>Started {timeDifference(new Date().getTime(),new Date(this.props.stream.started).getTime())}</div>
+          <div style={{ fontSize: "x-large", fontWeight: "bolder" }}>
+            {this.props.stream.title}
+          </div>
+          <div>
+            Started{" "}
+            {timeDifference(
+              new Date().getTime(),
+              new Date(this.props.stream.started).getTime()
+            )}
+          </div>
         </div>
 
-        <div
-          style={{ padding: "8px 20px", fontSize: "smaller"}}
-        >
+        <div style={{ padding: "8px 20px", fontSize: "smaller" }}>
           {this.props.stream.description}
-         
         </div>
       </div>
     );

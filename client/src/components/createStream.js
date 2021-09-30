@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import { nanoid } from "nanoid";
 import swal from "sweetalert";
 import setHeaders from "../utils/setheader";
 import "./styles/form.css";
+import { useSelector } from "react-redux";
 
 const CreateStream = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [streamKey, setKey] = useState();
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     setKey(nanoid);
@@ -16,8 +17,8 @@ const CreateStream = (props) => {
 
   function handleCreateStream(e) {
     e.preventDefault();
-    console.log(props.user.email, title, description, streamKey);
-    fetch(`/api/stream/createstream/${props.user.email}`, {
+    console.log(user.email, title, description, streamKey);
+    fetch(`/api/stream/createstream/${user.email}`, {
       method: "POST",
       headers: setHeaders({
         Accept: "application/json",
@@ -105,9 +106,4 @@ const CreateStream = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user.user,
-  };
-};
-export default connect(mapStateToProps)(CreateStream);
+export default CreateStream;

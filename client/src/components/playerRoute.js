@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-const PlayerRoute = ({
-  component: Component,
-  stream,
-  streamFound,
-  ...rest
-}) => {
-  console.log(stream);
-  // console.log(rest)
+const PlayerRoute = ({ component: Component, ...rest }) => {
   const [loader, setLoader] = useState(true);
+  const stream = useSelector((state) => state.stream.stream);
+  const streamFound = useSelector((state) => state.stream.streamFound);
   useEffect(() => {
     // setLoader(false);
     console.log(streamFound);
@@ -44,10 +39,4 @@ const PlayerRoute = ({
     );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    stream: state.stream.stream,
-    streamFound: state.stream.streamFound,
-  };
-};
-export default connect(mapStateToProps)(PlayerRoute);
+export default PlayerRoute;

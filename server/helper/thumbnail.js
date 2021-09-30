@@ -1,13 +1,13 @@
 const spawn = require('child_process').spawn;
-const cmd = '/usr/bin/ffmpeg'
+const cmd = "C:/Users/naman/Downloads/ffmpeg-4.3.2-2021-02-02-essentials_build/ffmpeg-4.3.2-2021-02-02-essentials_build/bin/ffmpeg.exe";
 
 const generateStreamThumbnail = (stream_key) => {
     const args = [
         '-y',
-        '-i', 'http://35.247.156.160:8000/live/'+stream_key+'.flv',
+        '-i', 'http://localhost:8001/live/'+stream_key+'.flv',
         '-ss', '00:00:01',
         '-vframes', '1',
-        '/home/pushkardureja/streamy/server/thumbnails/'+stream_key+'.png',
+        'C:/Users/naman/Desktop/IP/streamy/server/thumbnails/'+stream_key+'.png',
     ];
 
     spawn(cmd, args, {

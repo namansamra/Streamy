@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  height: 52px;
+  border-bottom: solid 4px white;
+  min-width: max-content;
+  font-family: var(--font1-font);
+  font-size: 14px;
+  color: var(--secondary-color);
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.enable {
+  border-bottom: solid 4px var(--primary-blue);
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
+.container:hover {
+  color: var(--primary-blue);
+}

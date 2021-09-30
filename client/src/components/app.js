@@ -18,8 +18,6 @@ import  NotFound  from "./error/notfound";
 
 
 const App = (props)=>{
-
-
     return(
         <div>
             

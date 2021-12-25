@@ -119,7 +119,7 @@ const MyStream = (props) => {
         <div className="d-flex">
           <div className="d-flex align-items-center">
             <img
-              src={"http://localhost:8002/images/" + st.key + ".png"}
+              src={`http://localhost:8002/images/` + st.key + ".png"}
               style={{ width: "10vw", height: "15vh", margin: "10px" }}
               onError={(e) => {
                 e.target.onerror = null;

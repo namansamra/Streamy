@@ -1,3 +1,4 @@
+import { mediaServer } from "../utils/constant";
 import { getStreamsInfo } from "../utils/getstreaminfo";
 
 export const setStreams = (streams) => {
@@ -20,7 +21,7 @@ export const setStreamStatusFalse = () => {
 
 export const fetchStreams = () => {
   return (dispatch) => {
-    fetch("http://localhost:8001/api/streams")
+    fetch(`${mediaServer}:3000/api/streams`)
       .then((data) => data.json())
       .then(async (res) => {
         console.log("fetching");

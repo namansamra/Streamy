@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
-import "./styles/home.scss";
+import "./styles/home.css";
 
 const Home = (props) => {
   const stream = useSelector((state) => state.stream.stream);

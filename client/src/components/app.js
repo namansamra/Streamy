@@ -17,21 +17,19 @@ import NotFound from "./error/notfound";
 const App = (props) => {
   const flash = useSelector((state) => state.flash.text);
   return (
-    <div>
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          {flash !== "" ? <FlashMessage /> : null}
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <ProtectedRoute path="/live" exact component={CreateStream} />
-          <Route path="/signup" exact component={SignUp} />
-          <ProtectedRoute path="/mystream" exact component={MyStream} />
-          <PlayerRoute path="/stream/:id" exact component={Player} />
-          <Route component={NotFound} />
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        {flash !== "" ? <FlashMessage /> : null}
+        <Route path="/" exact component={Home} />
+        <Route path="/login" exact component={Login} />
+        <ProtectedRoute path="/live" exact component={CreateStream} />
+        <Route path="/signup" exact component={SignUp} />
+        <ProtectedRoute path="/mystream" exact component={MyStream} />
+        <PlayerRoute path="/stream/:id" exact component={Player} />
+        <Route component={NotFound} />
+      </Switch>
+    </BrowserRouter>
   );
 };
 

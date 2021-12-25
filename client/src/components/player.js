@@ -45,7 +45,7 @@ import React from "react";
 import VideoJS from "./playerHelper"; // point to where the functional component is stored
 import "videojs-mux";
 import "video.js/dist/video-js.css";
-import "../components/styles/player.css";
+import styles from "../components/styles/player.module.css";
 const App = (props) => {
   const playerRef = React.useRef(null);
   console.log(props);
@@ -83,9 +83,9 @@ const App = (props) => {
 
   //
   return (
-    <div className="container">
-      <div className="videoPlayerDiv">
-        <div className="streamName">
+    <div className={styles.container}>
+      <div className={styles.videoPlayerDiv}>
+        <div className={styles.streamName}>
           DASH (Dynamic Adaptive Streaming over HTTP)
         </div>
         <VideoJS
@@ -117,8 +117,8 @@ const App = (props) => {
         />
       </div>
 
-      <div className="videoPlayerDiv">
-        <div className="streamName">HLS (HTTP Live Streaming)</div>
+      <div className={styles.videoPlayerDiv}>
+        <div className={styles.streamName}>HLS (HTTP Live Streaming)</div>
         <VideoJS
           options={{
             ...videoJsOptions,

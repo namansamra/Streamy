@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { batch, connect, useSelector } from "react-redux";
 
 import "./styles/home.css";
+import { backendServer } from "../utils/constant";
 
 const Home = (props) => {
   const stream = useSelector((state) => state.stream.stream);
@@ -13,7 +14,7 @@ const Home = (props) => {
         <Link to={"/stream/" + stream.key}>
           <div className="stream-thumbnail">
             <img
-              src={"http://localhost:8002/images/" + stream.key + ".png"}
+              src={backendServer + "/images/" + stream.key + ".png"}
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "/no_image.png";

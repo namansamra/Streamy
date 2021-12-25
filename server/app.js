@@ -35,11 +35,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-const mongoURL =
-  "mongodb+srv://naman:samranaman@123@authprocluster.onzij.gcp.mongodb.net/streamy?retryWrites=true&w=majority";
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
-const dbconnect = mongoose.connect(mongoURL, options);
+const dbconnect = mongoose.connect(process.env.MONGO_URL, options);
 dbconnect
   .then(() => console.log("mongo initialised"))
   .catch((err) => console.log(err));

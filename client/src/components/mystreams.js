@@ -5,6 +5,7 @@ import setHeaders from "../utils/setheader";
 import { timeDifference } from "../utils/timestamp";
 import EditModal from "./editstream";
 import { ShowAndHide } from "../utils/conditionalshow";
+import { backendServer } from "../utils/constant";
 
 const MyStream = (props) => {
   // console.log(stream)
@@ -16,7 +17,7 @@ const MyStream = (props) => {
 
   useEffect(() => {
     // console.log(props);
-    fetch(`/api/stream/getstreams/${user.email}`, {
+    fetch(`${backendServer}/api/stream/getstreams/${user.email}`, {
       headers: new Headers({
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const MyStream = (props) => {
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
-        const res = await fetch(`/api/stream/delete/${key}`, {
+        const res = await fetch(`${backendServer}/api/stream/delete/${key}`, {
           method: "DELETE",
           headers: setHeaders({
             Accept: "application/json",
@@ -82,14 +83,17 @@ const MyStream = (props) => {
     setModalState(false);
   }
   async function handleUpdate(newTitle, newDes) {
-    const res = await fetch(`/api/stream/update/${currStream.key}`, {
-      method: "PUT",
-      headers: setHeaders({
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }),
-      body: JSON.stringify({ title: newTitle, description: newDes }),
-    });
+    const res = await fetch(
+      `${backendServer}/api/stream/update/${currStream.key}`,
+      {
+        method: "PUT",
+        headers: setHeaders({
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify({ title: newTitle, description: newDes }),
+      }
+    );
     const updated = await res.json();
     if (updated) {
       const newStreams = [...myStreams];
@@ -119,7 +123,7 @@ const MyStream = (props) => {
         <div className="d-flex">
           <div className="d-flex align-items-center">
             <img
-              src={`http://localhost:8002/images/` + st.key + ".png"}
+              src={`${backendServer}/images/` + st.key + ".png"}
               style={{ width: "10vw", height: "15vh", margin: "10px" }}
               onError={(e) => {
                 e.target.onerror = null;

@@ -1,4 +1,5 @@
 import fb from "../config/firebase";
+import { backendServer } from "../utils/constant";
 
 export const setUser = (user) => {
   return {
@@ -15,7 +16,7 @@ export const clearUser = () => {
 
 export const login = (user) => {
   return async (dispatch) => {
-    fetch("/api/auth", {
+    fetch(backendServer + "/api/auth", {
       method: "POST",
       body: JSON.stringify({ user: user.user }),
       headers: new Headers({
@@ -37,7 +38,7 @@ export const login = (user) => {
 
 export const signup = (user) => {
   return async (dispatch) => {
-    fetch("/api/user/createuser", {
+    fetch(backendServer + "/api/user/createuser", {
       method: "POST",
       headers: new Headers({
         Accept: "application/json",

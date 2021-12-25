@@ -21,7 +21,7 @@ export const setStreamStatusFalse = () => {
 
 export const fetchStreams = () => {
   return (dispatch) => {
-    fetch(`${mediaServer}:3000/api/streams`)
+    fetch(`${mediaServer}/api/streams`)
       .then((data) => data.json())
       .then(async (res) => {
         console.log("fetching");

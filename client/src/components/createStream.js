@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import setHeaders from "../utils/setheader";
 import "./styles/form.css";
 import { useSelector } from "react-redux";
+import { backendServer } from "../utils/constant";
 
 const CreateStream = (props) => {
   const [title, setTitle] = useState("");
@@ -18,7 +19,7 @@ const CreateStream = (props) => {
   function handleCreateStream(e) {
     e.preventDefault();
     console.log(user.email, title, description, streamKey);
-    fetch(`/api/stream/createstream/${user.email}`, {
+    fetch(`${backendServer}/api/stream/createstream/${user.email}`, {
       method: "POST",
       headers: setHeaders({
         Accept: "application/json",

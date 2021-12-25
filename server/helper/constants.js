@@ -1,1 +1,1 @@
-module.exports = { mediaServer: "http://3.7.71.1" };
+module.exports = { mediaServer: "http://3.7.71.1:3000" };

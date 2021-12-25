@@ -1,3 +1,3 @@
-export const mediaServer = "http://3.7.71.1:3000";
+export const mediaServer = "https://mediaserver.pushkardureja.me";
 
-export const backendServer = "http://localhost:8002";
+export const backendServer = "https://streambackend.pushkardureja.me";
